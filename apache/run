@@ -1,5 +1,8 @@
-#!/usr/bin/with-contenv sh
+#!/usr/bin/env sh
 
-# From https://github.com/smebberson/docker-alpine/tree/master/alpine-apache
+if [ -e ./setup ]; then
+./setup
+fi
 
+# start apache
 exec /usr/sbin/apachectl -DFOREGROUND;
