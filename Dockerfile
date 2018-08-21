@@ -1,6 +1,6 @@
 # Alpine Linux with s6 service management
 FROM alpine:3.6
-
+   
 	# Install Apache2 and other stuff needed to access svn via WebDav
 RUN apk add --no-cache apache2 apache2-utils apache2-webdav mod_dav_svn &&\
 	# Install svn
@@ -19,8 +19,8 @@ RUN ln -sf /dev/stdout /var/log/apache2/access.log && \
     
 
 # Add services configurations
-ADD apache/ /etc/services.d/apache/
-ADD subversion/ /etc/services.d/subversion/
+#ADD apache/ /etc/services.d/apache/
+#ADD subversion/ /etc/services.d/subversion/
 
 # Add WebDav configuration
 ADD dav_svn.conf /etc/apache2/conf.d/
@@ -32,4 +32,5 @@ RUN 	htpasswd -b /etc/subversion/passwd user user &&\
 			svnadmin create /home/svn/rules-repo
 			
 			
-CMD /usr/sbin/apachectl -DFOREGROUND && /usr/bin/svnserve -d --foreground -r /home/svn --listen-port 3960
+CMD /usr/sbin/apachectl -DFOREGROUND &&\
+	 /usr/bin/svnserve -d --foreground -r /home/svn --listen-port 3960

@@ -15,3 +15,5 @@ docker exec -it svn /bin/ash
 
 
 docker rmi $(docker images -f “dangling=true” -q)
+
+eval "$(docker-machine env default)"
